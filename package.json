@@ -5,8 +5,11 @@
   "engines": {
     "node": ">=10"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "license": "MIT",
   "scripts": {
+    "build": "rollup -c",
     "test:test262": "node run_test262.js"
   },
   "peerDependencies": {
@@ -15,6 +18,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "acorn": "^7.1.0",
+    "rollup": "^1.27.5",
     "test262": "git+https://github.com/tc39/test262.git#2213d13a4bbf52f7a14cf7a8a4c1bfad0f935bb1",
     "test262-parser-runner": "^0.5.0"
   }
