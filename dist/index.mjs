@@ -1,9 +1,3 @@
-import { TokenType, tokTypes } from 'acorn';
-
-const tt = tokTypes;
-
-const questionDot = new TokenType("?.");
-
 // Inspired by https://github.com/babel/babel/blob/master/packages/babel-parser/src/parser/expression.js#L592
 
 // Fill the charCodes usage from 'charcodes' for Babel code
@@ -19,10 +13,11 @@ const charCodes = {
  * @param {typeof acorn.Parser} BaseParser
  */
 function optionalChaining(BaseParser) {
+  const acorn = BaseParser.acorn;
+  const tt = acorn.tokTypes;
   const Parser = class extends BaseParser {
     // from babel-parser: src/tokenizer/index.js
     readToken_question() {
-      console.log('reading question mark...');
       // '?'
       // this.state -> this
       const next = this.input.charCodeAt(this.pos + 1);
@@ -108,7 +103,7 @@ function optionalChaining(BaseParser) {
     }
   };
   // @ts-ignore
-  Parser.prototype.questionDotToken = questionDot;
+  Parser.prototype.questionDotToken = new acorn.TokenType("?.");
   return Parser;
 }
 
