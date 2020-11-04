@@ -79,12 +79,12 @@ function optionalChaining(BaseParser) {
           node.computed = true;
           node.optional = true;
           this.expect(tt.bracketR);
-          return this.finishNode(node, "OptionalMemberExpression");
+          return this.finishNode(node, "Identifier");
         } else if (this.eat(tt.parenL)) {
           node.callee = base;
           node.arguments = this.parseExprList(tt.parenR, this.options.ecmaVersion >= 8, false);
           node.optional = true;
-          return this.finishNode(node, "OptionalCallExpression"); // finishCallExpression
+          return this.finishNode(node, "Identifier"); // finishCallExpression
         } else {
           node.object = base;
           node.property = this.parseIdent(true);
@@ -99,7 +99,7 @@ function optionalChaining(BaseParser) {
             return base;
           }
 
-          return this.finishNode(node, "OptionalMemberExpression");
+          return this.finishNode(node, "Identifier");
         }
       } else {
         return super.parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow)
